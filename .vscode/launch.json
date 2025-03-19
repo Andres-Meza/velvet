@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-VelvetApplication<velvet>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.uniminuto.velvet.VelvetApplication",
+      "projectName": "velvet",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
