@@ -121,7 +121,7 @@ public class UserDTO {
   @AllArgsConstructor
   public static class UserDetails {
     private Long id;
-    private String documentTypeName; // Cambiado para mostrar el nombre del tipo de documento
+    private String documentTypeName;
     private String document;
     private String name;
     private String lastName;

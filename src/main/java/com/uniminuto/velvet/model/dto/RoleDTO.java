@@ -48,4 +48,14 @@ public class RoleDTO {
     private String description;
     private Set<String> permissions;
   }
+
+  @Data
+  @Builder
+  @NoArgsConstructor
+  @AllArgsConstructor
+  public static class SimpleRole {
+    private Long id;
+    private String name;
+    private String description;
+  }
 }

@@ -53,6 +53,6 @@ public class ProductTypeDTO {
   public static class SimpleProductType {
     private Long id;
     private String name;
-    private String desription;
+    private String description;
   }
 }
