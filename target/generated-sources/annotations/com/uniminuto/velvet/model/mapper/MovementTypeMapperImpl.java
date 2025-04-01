@@ -2,12 +2,14 @@ package com.uniminuto.velvet.model.mapper;
 
 import com.uniminuto.velvet.model.dto.MovementTypeDTO;
 import com.uniminuto.velvet.model.entity.MovementType;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-03-22T13:54:51-0500",
+    date = "2025-04-01T00:25:08-0500",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.5 (Eclipse Adoptium)"
 )
 @Component
@@ -71,5 +73,33 @@ public class MovementTypeMapperImpl implements MovementTypeMapper {
         entity.setName( dto.getName() );
         entity.setDescription( dto.getDescription() );
         entity.setAffectsStock( dto.getAffectsStock() );
+    }
+
+    @Override
+    public List<MovementTypeDTO.SimpleMovementType> toSimpleDtoList(List<MovementType> entities) {
+        if ( entities == null ) {
+            return null;
+        }
+
+        List<MovementTypeDTO.SimpleMovementType> list = new ArrayList<MovementTypeDTO.SimpleMovementType>( entities.size() );
+        for ( MovementType movementType : entities ) {
+            list.add( toSimpleDTO( movementType ) );
+        }
+
+        return list;
+    }
+
+    @Override
+    public List<MovementTypeDTO.DetailsMovementType> toDetailsDtoList(List<MovementType> entities) {
+        if ( entities == null ) {
+            return null;
+        }
+
+        List<MovementTypeDTO.DetailsMovementType> list = new ArrayList<MovementTypeDTO.DetailsMovementType>( entities.size() );
+        for ( MovementType movementType : entities ) {
+            list.add( toDetailsDTO( movementType ) );
+        }
+
+        return list;
     }
 }

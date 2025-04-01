@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-03-22T13:54:52-0500",
+    date = "2025-03-31T11:48:48-0500",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.5 (Eclipse Adoptium)"
 )
 @Component
@@ -110,6 +110,20 @@ public class LocationMapperImpl implements LocationMapper {
         List<LocationDTO.SimpleLocation> list = new ArrayList<LocationDTO.SimpleLocation>( entities.size() );
         for ( Location location : entities ) {
             list.add( toSimpleDto( location ) );
+        }
+
+        return list;
+    }
+
+    @Override
+    public List<LocationDTO.DetailsLocation> toDetailsDtoList(List<Location> entities) {
+        if ( entities == null ) {
+            return null;
+        }
+
+        List<LocationDTO.DetailsLocation> list = new ArrayList<LocationDTO.DetailsLocation>( entities.size() );
+        for ( Location location : entities ) {
+            list.add( toDetailsDto( location ) );
         }
 
         return list;

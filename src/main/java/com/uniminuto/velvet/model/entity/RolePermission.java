@@ -1,15 +1,17 @@
 package com.uniminuto.velvet.model.entity;
 
-import java.time.LocalDateTime;
-
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "role_has_permission")
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class RolePermission {
   @Id
@@ -18,14 +20,17 @@ public class RolePermission {
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "role_id", nullable = false)
+  @ToString.Exclude
   private Role role;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "permission_id", nullable = false)
+  @ToString.Exclude
   private Permission permission;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "assigned_by", nullable = false)
+  @ToString.Exclude
   private User assignedBy;
 
   @Builder.Default

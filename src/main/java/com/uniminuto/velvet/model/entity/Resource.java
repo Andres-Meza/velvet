@@ -11,16 +11,18 @@ import java.util.Set;
   name = "resources",
   uniqueConstraints = { @UniqueConstraint(columnNames = {"name"}, name = "resources_name_key") }
 )
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class Resource {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(nullable = false, length = 255)
+  @Column(nullable = false)
   private String name;
 
   @OneToMany(mappedBy = "resource", fetch = FetchType.LAZY)

@@ -16,9 +16,11 @@ import java.time.LocalDateTime;
     @UniqueConstraint(columnNames = {"document"}, name = "uk_user_document")
   }
 )
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class User {
   @Id
@@ -42,6 +44,7 @@ public class User {
   
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "document_type_id", nullable = false)
+  @ToString.Exclude
   private DocumentType documentType;
   
   @Column(nullable = false, length = 50)
@@ -49,10 +52,12 @@ public class User {
   
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "role_id", nullable = false)
+  @ToString.Exclude
   private Role role;
   
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "location_id", nullable = false)
+  @ToString.Exclude
   private Location location;
   
   @Builder.Default

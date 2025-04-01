@@ -1,18 +1,14 @@
 package com.uniminuto.velvet.model.mapper;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.Named;
-import org.mapstruct.NullValuePropertyMappingStrategy;
-import org.mapstruct.factory.Mappers;
-
 import com.uniminuto.velvet.model.dto.PaymentMethodDTO;
 import com.uniminuto.velvet.model.entity.Order;
 import com.uniminuto.velvet.model.entity.PaymentMethod;
+import org.mapstruct.*;
+import org.mapstruct.factory.Mappers;
+
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface PaymentMethodMapper {
@@ -34,7 +30,12 @@ public interface PaymentMethodMapper {
   // Convierte una entidad PaymentMethod a un DTO DetailsPaymentMethod
   @Mapping(target = "orders", source = "orders", qualifiedByName = "orderSetToStringSet")
   PaymentMethodDTO.DetailsPaymentMethod toDetailsDto(PaymentMethod paymentMethod);
-  
+
+  List<PaymentMethodDTO.SimplePaymentMethod> toSimpleDtoList(List<PaymentMethod> entities);
+
+  // Convertir lista de PaymentMethod a lista de DetailsPaymentMethod
+  List<PaymentMethodDTO.DetailsPaymentMethod> toDetailsDtoList(List<PaymentMethod> entities);
+
   // Método auxiliar para convertir un conjunto de órdenes a un conjunto de cadenas
   @Named("orderSetToStringSet")
   default Set<String> orderSetToStringSet(Set<Order> orders) {

@@ -1,30 +1,19 @@
 package com.uniminuto.velvet.model.entity;
 
-import java.math.BigDecimal;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "order_details")
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class OrderDetail {
 
@@ -60,8 +49,7 @@ public class OrderDetail {
   @PreUpdate
   protected void validateSubtotal() {
     if (this.quantity != null && this.unitPrice != null) {
-      BigDecimal calculatedSubtotal = this.unitPrice.multiply(BigDecimal.valueOf(this.quantity));
-      this.subtotal = calculatedSubtotal;
+        this.subtotal = this.unitPrice.multiply(BigDecimal.valueOf(this.quantity));
     }
   }
 }

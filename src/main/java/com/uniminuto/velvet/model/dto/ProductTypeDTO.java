@@ -17,6 +17,9 @@ public class ProductTypeDTO {
     @NotBlank(message = "El nombre del tipo de producto es obligatorio")
     @Size(min = 2, max = 100, message = "El nombre debe tener entre 2 y 100 caracteres")
     private String name;
+    @NotBlank(message = "La descripción del tipo de producto es obligatorio")
+    @Size(max = 255, message = "La descripción no puede tener más de 255 caracteres")
+    private String description;
   }
 
   @Data

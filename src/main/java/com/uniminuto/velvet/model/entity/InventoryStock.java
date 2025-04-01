@@ -1,23 +1,24 @@
 package com.uniminuto.velvet.model.entity;
 
-import java.time.LocalDateTime;
-
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(
   name = "inventory_stock",
   uniqueConstraints = { @UniqueConstraint(columnNames = {"product_id", "location_id"}, name = "uk_product_location") }
 )
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class InventoryStock {
   @Id
@@ -27,11 +28,13 @@ public class InventoryStock {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "product_id", nullable = false)
   @JsonBackReference
+  @ToString.Exclude
   private Product product;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "location_id", nullable = false)
   @JsonBackReference
+  @ToString.Exclude
   private Location location;
 
   @Column(name = "current_stock", nullable = false)

@@ -1,18 +1,21 @@
 package com.uniminuto.velvet.model.entity;
 
-import java.util.ArrayList;
-import java.util.List;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(
   name = "tables",
   uniqueConstraints = { @UniqueConstraint(columnNames = {"number", "location_id"}, name = "uk_table_number_location") }
 )
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class Tables {
   
@@ -23,7 +26,7 @@ public class Tables {
   @Column(nullable = false)
   private String number;
   
-  @Column(length = 255)
+  @Column()
   private String description;
   
   @Column(nullable = false)
@@ -31,6 +34,7 @@ public class Tables {
   
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "location_id", nullable = false)
+  @ToString.Exclude
   private Location location;
   
   @Builder.Default

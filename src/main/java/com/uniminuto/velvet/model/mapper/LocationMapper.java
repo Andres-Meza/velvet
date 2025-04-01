@@ -1,15 +1,14 @@
 package com.uniminuto.velvet.model.mapper;
 
-import java.util.List;
-
+import com.uniminuto.velvet.model.dto.LocationDTO;
+import com.uniminuto.velvet.model.entity.Location;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
-import com.uniminuto.velvet.model.dto.LocationDTO;
-import com.uniminuto.velvet.model.entity.Location;
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface LocationMapper {
@@ -47,6 +46,8 @@ public interface LocationMapper {
   
   // Convertir lista de Location a lista de SimpleLocation
   List<LocationDTO.SimpleLocation> toSimpleDtoList(List<Location> entities);
+
+  List<LocationDTO.DetailsLocation> toDetailsDtoList(List<Location> entities);
   
   // Método auxiliar para contar usuarios
   @Named("countUsers")

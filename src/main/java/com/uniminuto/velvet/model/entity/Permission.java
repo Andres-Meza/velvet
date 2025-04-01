@@ -11,19 +11,21 @@ import java.util.Set;
   name = "permissions",
   uniqueConstraints = { @UniqueConstraint(columnNames = {"name"}, name = "permissions_name_key") }
 )
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class Permission {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(nullable = false, length = 255)
+  @Column(nullable = false)
   private String name;
 
-  @Column(length = 255)
+  @Column()
   private String description;
 
   @ManyToOne(fetch = FetchType.LAZY)

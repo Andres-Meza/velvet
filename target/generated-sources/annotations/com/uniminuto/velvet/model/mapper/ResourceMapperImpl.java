@@ -2,12 +2,14 @@ package com.uniminuto.velvet.model.mapper;
 
 import com.uniminuto.velvet.model.dto.ResourceDTO;
 import com.uniminuto.velvet.model.entity.Resource;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-03-22T13:54:52-0500",
+    date = "2025-03-26T22:46:03-0500",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.5 (Eclipse Adoptium)"
 )
 @Component
@@ -77,5 +79,19 @@ public class ResourceMapperImpl implements ResourceMapper {
         detailsResource.name( entity.getName() );
 
         return detailsResource.build();
+    }
+
+    @Override
+    public List<ResourceDTO.DetailsResource> toResourceDetailList(List<Resource> entities) {
+        if ( entities == null ) {
+            return null;
+        }
+
+        List<ResourceDTO.DetailsResource> list = new ArrayList<ResourceDTO.DetailsResource>( entities.size() );
+        for ( Resource resource : entities ) {
+            list.add( toDetailsDto( resource ) );
+        }
+
+        return list;
     }
 }

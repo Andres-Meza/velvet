@@ -36,9 +36,7 @@ public interface OrderStatusMapper {
     }
     
     return orders.stream()
-      .map(order -> {
-        return "Orden # " + order.getOrderNumber();
-      })
+      .map(order -> "Orden # " + order.getOrderNumber())
       .collect(Collectors.toSet());
   }
 }

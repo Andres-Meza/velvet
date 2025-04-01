@@ -11,9 +11,11 @@ import java.util.Set;
   name = "units_of_measure",
   uniqueConstraints = { @UniqueConstraint(columnNames = {"name"}, name = "units_of_measure_name_key") }
 )
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class UnitOfMeasure {
   @Id

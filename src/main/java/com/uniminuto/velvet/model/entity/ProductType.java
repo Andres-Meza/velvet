@@ -11,9 +11,11 @@ import java.util.Set;
   name = "product_types",
   uniqueConstraints = { @UniqueConstraint(columnNames = {"name"}, name = "product_types_name_key") }
 )
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class ProductType {
   @Id
@@ -23,7 +25,7 @@ public class ProductType {
   @Column(nullable = false, length = 50)
   private String name;
 
-  @Column(length = 255)
+  @Column()
   private String description;
 
   @OneToMany(mappedBy = "productType", fetch = FetchType.LAZY)

@@ -1,19 +1,21 @@
 package com.uniminuto.velvet.model.entity;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(
   name = "roles",
   uniqueConstraints = { @UniqueConstraint(columnNames = {"name"}, name = "roles_name_key") }
 )
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class Role {
   @Id

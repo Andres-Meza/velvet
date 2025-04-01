@@ -65,13 +65,11 @@ public interface PermissionMapper {
     }
     
     return rolePermissions.stream()
-      .map(rp -> {
-        return RoleDTO.DetailsRole.builder()
-          .id(rp.getRole().getId())
-          .name(rp.getRole().getName())
-          .description(rp.getRole().getDescription())
-          .build();
-      })
+      .map(rp -> RoleDTO.DetailsRole.builder()
+        .id(rp.getRole().getId())
+        .name(rp.getRole().getName())
+        .description(rp.getRole().getDescription())
+        .build())
       .collect(Collectors.toSet());
   }
 }

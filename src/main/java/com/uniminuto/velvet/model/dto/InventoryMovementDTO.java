@@ -37,7 +37,7 @@ public class InventoryMovementDTO {
     @Min(value = 1, message = "La cantidad debe ser mayor a 0")
     private Integer quantity;
 
-    @DecimalMin(value = "0.0", inclusive = true, message = "El costo unitario no puede ser negativo")
+    @DecimalMin(value = "0.0", message = "El costo unitario no puede ser negativo")
     @Digits(integer = 10, fraction = 2, message = "El costo unitario debe tener hasta 10 dígitos enteros y 2 decimales")
     private BigDecimal unitCost;
 
@@ -69,7 +69,7 @@ public class InventoryMovementDTO {
     @Min(value = 1, message = "La cantidad debe ser mayor a 0")
     private Integer quantity;
 
-    @DecimalMin(value = "0.0", inclusive = true, message = "El costo unitario no puede ser negativo")
+    @DecimalMin(value = "0.0", message = "El costo unitario no puede ser negativo")
     @Digits(integer = 10, fraction = 2, message = "El costo unitario debe tener hasta 10 dígitos enteros y 2 decimales")
     private BigDecimal unitCost;
 

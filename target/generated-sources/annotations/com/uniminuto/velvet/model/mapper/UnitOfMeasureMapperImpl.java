@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-03-22T13:54:52-0500",
+    date = "2025-03-30T21:49:46-0500",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.5 (Eclipse Adoptium)"
 )
 @Component
@@ -95,6 +95,20 @@ public class UnitOfMeasureMapperImpl implements UnitOfMeasureMapper {
         List<UnitOfMeasureDTO.SimpleUnitOfMeasure> list = new ArrayList<UnitOfMeasureDTO.SimpleUnitOfMeasure>( entities.size() );
         for ( UnitOfMeasure unitOfMeasure : entities ) {
             list.add( toSimpleDto( unitOfMeasure ) );
+        }
+
+        return list;
+    }
+
+    @Override
+    public List<UnitOfMeasureDTO.DetailsUnitOfMeasure> toDetailsDtoList(List<UnitOfMeasure> entities) {
+        if ( entities == null ) {
+            return null;
+        }
+
+        List<UnitOfMeasureDTO.DetailsUnitOfMeasure> list = new ArrayList<UnitOfMeasureDTO.DetailsUnitOfMeasure>( entities.size() );
+        for ( UnitOfMeasure unitOfMeasure : entities ) {
+            list.add( toDetailsDto( unitOfMeasure ) );
         }
 
         return list;

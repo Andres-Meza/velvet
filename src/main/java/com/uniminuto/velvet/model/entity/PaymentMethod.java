@@ -11,9 +11,11 @@ import java.util.Set;
   name = "payment_methods",
   uniqueConstraints = { @UniqueConstraint(columnNames = {"name"}, name = "payment_methods_name_key") }
 )
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class PaymentMethod {
   @Id
@@ -23,7 +25,7 @@ public class PaymentMethod {
   @Column(nullable = false, length = 50)
   private String name;
   
-  @Column(length = 255)
+  @Column()
   private String description;
   
   @OneToMany(mappedBy = "paymentMethod", fetch = FetchType.LAZY)

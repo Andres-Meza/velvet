@@ -3,6 +3,7 @@ package com.uniminuto.velvet.model.mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.uniminuto.velvet.model.entity.Permission;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -54,7 +55,9 @@ public interface ResourceMapper {
       return null;
     }
     return resource.getPermissions().stream()
-      .map(permission -> permission.getName())
+      .map(Permission::getName)
       .collect(Collectors.joining(", "));
   }
+
+  List<ResourceDTO.DetailsResource> toResourceDetailList(List<Resource> entities);
 }

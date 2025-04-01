@@ -2,12 +2,14 @@ package com.uniminuto.velvet.model.mapper;
 
 import com.uniminuto.velvet.model.dto.PaymentMethodDTO;
 import com.uniminuto.velvet.model.entity.PaymentMethod;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-03-22T13:54:52-0500",
+    date = "2025-04-01T00:25:09-0500",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.5 (Eclipse Adoptium)"
 )
 @Component
@@ -73,5 +75,33 @@ public class PaymentMethodMapperImpl implements PaymentMethodMapper {
         detailsPaymentMethod.description( paymentMethod.getDescription() );
 
         return detailsPaymentMethod.build();
+    }
+
+    @Override
+    public List<PaymentMethodDTO.SimplePaymentMethod> toSimpleDtoList(List<PaymentMethod> entities) {
+        if ( entities == null ) {
+            return null;
+        }
+
+        List<PaymentMethodDTO.SimplePaymentMethod> list = new ArrayList<PaymentMethodDTO.SimplePaymentMethod>( entities.size() );
+        for ( PaymentMethod paymentMethod : entities ) {
+            list.add( toSimpleDto( paymentMethod ) );
+        }
+
+        return list;
+    }
+
+    @Override
+    public List<PaymentMethodDTO.DetailsPaymentMethod> toDetailsDtoList(List<PaymentMethod> entities) {
+        if ( entities == null ) {
+            return null;
+        }
+
+        List<PaymentMethodDTO.DetailsPaymentMethod> list = new ArrayList<PaymentMethodDTO.DetailsPaymentMethod>( entities.size() );
+        for ( PaymentMethod paymentMethod : entities ) {
+            list.add( toDetailsDto( paymentMethod ) );
+        }
+
+        return list;
     }
 }

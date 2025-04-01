@@ -1,10 +1,10 @@
 package com.uniminuto.velvet.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,9 +15,11 @@ import java.util.List;
   name = "locations",
   uniqueConstraints = { @UniqueConstraint(columnNames = {"name"}, name = "uk_location_name") }
 )
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class Location {
   @Id
@@ -27,7 +29,7 @@ public class Location {
   @Column(nullable = false, length = 100)
   private String name;
   
-  @Column(nullable = false, length = 255)
+  @Column(nullable = false)
   private String address;
   
   @Column(length = 500)

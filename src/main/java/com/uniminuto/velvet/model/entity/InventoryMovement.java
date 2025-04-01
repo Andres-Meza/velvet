@@ -1,16 +1,19 @@
 package com.uniminuto.velvet.model.entity;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "inventory_movements")
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class InventoryMovement {
   @Id
@@ -50,7 +53,7 @@ public class InventoryMovement {
   @JsonBackReference
   private User createdBy;
   
-  @Column(length = 255)
+  @Column()
   private String reference;
   
   @Column(length = 500)

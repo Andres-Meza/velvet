@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-03-22T13:54:52-0500",
+    date = "2025-03-31T09:25:48-0500",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.5 (Eclipse Adoptium)"
 )
 @Component
@@ -24,6 +24,7 @@ public class ProductTypeMapperImpl implements ProductTypeMapper {
         ProductType.ProductTypeBuilder productType = ProductType.builder();
 
         productType.name( dto.getName() );
+        productType.description( dto.getDescription() );
 
         return productType.build();
     }
@@ -83,6 +84,20 @@ public class ProductTypeMapperImpl implements ProductTypeMapper {
         detailsProductType.description( entity.getDescription() );
 
         return detailsProductType.build();
+    }
+
+    @Override
+    public List<ProductTypeDTO.DetailsProductType> toDetailsDtoList(List<ProductType> entities) {
+        if ( entities == null ) {
+            return null;
+        }
+
+        List<ProductTypeDTO.DetailsProductType> list = new ArrayList<ProductTypeDTO.DetailsProductType>( entities.size() );
+        for ( ProductType productType : entities ) {
+            list.add( toDetailsDto( productType ) );
+        }
+
+        return list;
     }
 
     @Override

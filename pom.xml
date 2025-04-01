@@ -94,6 +94,12 @@
       <scope>provided</scope>
     </dependency>
 
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok-mapstruct-binding</artifactId>
+      <version>${lombok-mapstruct-binding.version}</version>
+    </dependency>
+
     <!-- Reportes -->
     <dependency>
       <groupId>net.sf.jasperreports</groupId>
@@ -119,10 +125,15 @@
       <artifactId>spring-security-test</artifactId>
       <scope>test</scope>
     </dependency>
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-actuator</artifactId>
+      </dependency>
   </dependencies>
 
   <build>
     <plugins>
+      <!-- Configuración actual del spring-boot-maven-plugin -->
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
@@ -136,7 +147,7 @@
         </configuration>
       </plugin>
       
-      <!-- Configuración del plugin de compilación para MapStruct y Lombok -->
+      <!-- Configuración del plugin de compilación -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -163,6 +174,7 @@
           <compilerArgs>
             <arg>-Amapstruct.defaultComponentModel=spring</arg>
             <arg>-Amapstruct.verbose=true</arg>
+            <arg>-Amapstruct.unmappedTargetPolicy=IGNORE</arg>
           </compilerArgs>
         </configuration>
       </plugin>

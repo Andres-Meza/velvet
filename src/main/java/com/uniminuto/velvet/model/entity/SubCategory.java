@@ -5,8 +5,10 @@ import lombok.*;
 
 @Entity
 @Table(name = "subcategories")
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @AllArgsConstructor
 public class SubCategory {
   @Id
