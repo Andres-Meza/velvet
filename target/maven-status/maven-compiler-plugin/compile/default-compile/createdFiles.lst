@@ -6,12 +6,14 @@ com\uniminuto\velvet\model\dto\ProductTypeDTO$DetailsProductType.class
 com\uniminuto\velvet\model\dto\ProductTypeDTO$CreateProductType$CreateProductTypeBuilder.class
 com\uniminuto\velvet\model\dto\OrderStatusDTO$CreateOrderStatus$CreateOrderStatusBuilder.class
 com\uniminuto\velvet\model\dto\UserDTO.class
+com\uniminuto\velvet\service\impl\RoleServiceImpl.class
 com\uniminuto\velvet\model\dto\InventoryStockDTO$CreateInventoryStock$CreateInventoryStockBuilder.class
 com\uniminuto\velvet\model\entity\OrderDetail.class
 com\uniminuto\velvet\model\dto\RoleDTO$UpdateRole$UpdateRoleBuilder.class
 com\uniminuto\velvet\model\dto\ProductCompositionDTO$DetailsProductComposition$DetailsProductCompositionBuilder.class
 com\uniminuto\velvet\model\entity\DocumentType$DocumentTypeBuilder.class
 com\uniminuto\velvet\model\mapper\PaymentMethodMapperImpl.class
+com\uniminuto\velvet\service\impl\DocumentTypeServiceImpl.class
 com\uniminuto\velvet\model\dto\OrderDetailDTO$SimpleOrderDetail$SimpleOrderDetailBuilder.class
 com\uniminuto\velvet\model\entity\Permission.class
 com\uniminuto\velvet\model\entity\Role.class
@@ -22,6 +24,7 @@ com\uniminuto\velvet\model\dto\LocationDTO$DetailsLocation$DetailsLocationBuilde
 com\uniminuto\velvet\model\mapper\UnitOfMeasureMapperImpl.class
 com\uniminuto\velvet\model\dto\InventoryMovementDTO$SimpleInventoryMovement$SimpleInventoryMovementBuilder.class
 com\uniminuto\velvet\model\dto\PaymentMethodDTO$UpdatePaymentMethod$UpdatePaymentMethodBuilder.class
+com\uniminuto\velvet\service\interfaces\SubCategoryService.class
 com\uniminuto\velvet\model\dto\MovementTypeDTO.class
 com\uniminuto\velvet\model\dto\OrderStatusDTO.class
 com\uniminuto\velvet\model\dto\RoleDTO$CreateRole$CreateRoleBuilder.class
@@ -35,6 +38,7 @@ com\uniminuto\velvet\model\dto\OrderStatusDTO$UpdateOrderStatus$UpdateOrderStatu
 com\uniminuto\velvet\model\dto\ProductTypeDTO$UpdateProductType$UpdateProductTypeBuilder.class
 com\uniminuto\velvet\model\dto\OrderStatusDTO$DetailsOrderStatus.class
 com\uniminuto\velvet\model\entity\Resource.class
+com\uniminuto\velvet\service\impl\PaymentMethodServiceImpl.class
 com\uniminuto\velvet\model\dto\MovementTypeDTO$SimpleMovementType$SimpleMovementTypeBuilder.class
 com\uniminuto\velvet\model\dto\PaymentMethodDTO$CreatePaymentMethod.class
 com\uniminuto\velvet\model\dto\UserDTO$CreateUser$CreateUserBuilder.class
@@ -51,15 +55,19 @@ com\uniminuto\velvet\model\dto\OrderStatusDTO$DetailsOrderStatus$DetailsOrderSta
 com\uniminuto\velvet\model\dto\ProductDTO$DetailsProduct$DetailsProductBuilder.class
 com\uniminuto\velvet\model\repository\DocumentTypeRepository.class
 com\uniminuto\velvet\model\dto\InventoryStockDTO$UpdateInventoryStock$UpdateInventoryStockBuilder.class
+com\uniminuto\velvet\controller\SubCategoryController.class
 com\uniminuto\velvet\model\dto\InventoryMovementDTO$DetailsInventoryMovement.class
 com\uniminuto\velvet\model\dto\InventoryLimitsDTO.class
 com\uniminuto\velvet\model\entity\ProductType$ProductTypeBuilder.class
 com\uniminuto\velvet\model\dto\PaymentMethodDTO.class
+com\uniminuto\velvet\service\impl\SubCategoryServiceImpl.class
 com\uniminuto\velvet\model\dto\TablesDTO$DetailsTable$DetailsTableBuilder.class
 com\uniminuto\velvet\model\dto\TablesDTO.class
 com\uniminuto\velvet\model\dto\LocationDTO$CreateLocation.class
 com\uniminuto\velvet\model\repository\OrderStatusRepository.class
+com\uniminuto\velvet\service\impl\LocationServiceImpl.class
 com\uniminuto\velvet\model\dto\TablesDTO$CreateTable$CreateTableBuilder.class
+com\uniminuto\velvet\service\interfaces\ProductTypeService.class
 com\uniminuto\velvet\model\mapper\TablesMapper.class
 com\uniminuto\velvet\model\dto\ResourceDTO.class
 com\uniminuto\velvet\model\dto\OrderDTO$UpdatePaymentStatus$UpdatePaymentStatusBuilder.class
@@ -101,6 +109,7 @@ com\uniminuto\velvet\model\repository\ProductTypeRepository.class
 com\uniminuto\velvet\model\mapper\RolePermissionMapperImpl.class
 com\uniminuto\velvet\model\dto\InventoryLimitsDTO$CreateInventoryLimits$CreateInventoryLimitsBuilder.class
 com\uniminuto\velvet\model\dto\RoleDTO.class
+com\uniminuto\velvet\service\impl\MovementTypeServiceImpl.class
 com\uniminuto\velvet\model\dto\DocumentTypeDTO$DocumentTypeDetail.class
 com\uniminuto\velvet\model\dto\UnitOfMeasureDTO$SimpleUnitOfMeasure$SimpleUnitOfMeasureBuilder.class
 com\uniminuto\velvet\model\mapper\RoleMapper.class
@@ -108,6 +117,7 @@ com\uniminuto\velvet\model\dto\ProductDTO$UpdateProduct.class
 com\uniminuto\velvet\model\dto\ProductCompositionDTO$DetailsProductComposition.class
 com\uniminuto\velvet\model\dto\UserDTO$UserDetails.class
 com\uniminuto\velvet\model\mapper\UnitOfMeasureMapper.class
+com\uniminuto\velvet\controller\ProductTypeController.class
 com\uniminuto\velvet\model\entity\InventoryMovement$InventoryMovementBuilder.class
 com\uniminuto\velvet\model\mapper\OrderStatusMapper.class
 com\uniminuto\velvet\model\dto\InventoryLimitsDTO$SimpleInventoryLimits$SimpleInventoryLimitsBuilder.class
@@ -116,6 +126,7 @@ com\uniminuto\velvet\model\dto\RolePermissionDTO$DetailsRolePermission.class
 com\uniminuto\velvet\model\dto\MovementTypeDTO$DetailsMovementType$DetailsMovementTypeBuilder.class
 com\uniminuto\velvet\model\entity\Category$CategoryBuilder.class
 com\uniminuto\velvet\model\dto\InventoryMovementDTO$SimpleInventoryMovement.class
+com\uniminuto\velvet\exception\ResourceNotFoundException.class
 com\uniminuto\velvet\model\entity\InventoryLimits$InventoryLimitsBuilder.class
 com\uniminuto\velvet\model\mapper\DocumentTypeMapperImpl.class
 com\uniminuto\velvet\model\dto\ProductDTO$DetailsProduct.class
@@ -128,6 +139,7 @@ com\uniminuto\velvet\model\entity\UnitOfMeasure.class
 com\uniminuto\velvet\model\dto\UserDTO$UpdateUser$UpdateUserBuilder.class
 com\uniminuto\velvet\model\dto\TablesDTO$UpdateTable$UpdateTableBuilder.class
 com\uniminuto\velvet\model\entity\ProductComposition$ProductCompositionBuilder.class
+com\uniminuto\velvet\controller\LocationController.class
 com\uniminuto\velvet\model\mapper\DocumentTypeMapper.class
 com\uniminuto\velvet\model\entity\SubCategory.class
 com\uniminuto\velvet\model\dto\OrderDTO$UpdateOrderStatus$UpdateOrderStatusBuilder.class
@@ -135,9 +147,12 @@ com\uniminuto\velvet\model\mapper\LocationMapperImpl.class
 com\uniminuto\velvet\model\entity\PaymentMethod.class
 com\uniminuto\velvet\model\mapper\InventoryStockMapperImpl.class
 com\uniminuto\velvet\model\dto\OrderDTO$CreateOrder$CreateOrderBuilder.class
+com\uniminuto\velvet\service\interfaces\MovementTypeService.class
 com\uniminuto\velvet\model\dto\PaymentMethodDTO$DetailsPaymentMethod.class
 com\uniminuto\velvet\model\mapper\OrderDetailMapper.class
+com\uniminuto\velvet\service\interfaces\DocumentTypeService.class
 com\uniminuto\velvet\model\dto\ProductTypeDTO$DetailsProductType$DetailsProductTypeBuilder.class
+com\uniminuto\velvet\controller\PaymentMethodController.class
 com\uniminuto\velvet\model\dto\LocationDTO$UpdateLocation.class
 com\uniminuto\velvet\model\dto\OrderDetailDTO$OrderDetailsByProduct$OrderDetailsByProductBuilder.class
 com\uniminuto\velvet\model\dto\UnitOfMeasureDTO$DetailsUnitOfMeasure.class
@@ -149,8 +164,10 @@ com\uniminuto\velvet\model\dto\ProductTypeDTO.class
 com\uniminuto\velvet\model\dto\SubCategoryDTO.class
 com\uniminuto\velvet\model\repository\InventoryMovementRepository.class
 com\uniminuto\velvet\model\dto\ResourceDTO$DetailsResource.class
+com\uniminuto\velvet\controller\UnitOfMeasureController.class
 com\uniminuto\velvet\model\dto\InventoryMovementDTO$UpdateInventoryMovement.class
 com\uniminuto\velvet\model\dto\OrderStatusDTO$UpdateOrderStatus.class
+com\uniminuto\velvet\service\impl\UnitOfMeasureServiceImpl.class
 com\uniminuto\velvet\model\dto\SubCategoryDTO$UpdateSubCategory$UpdateSubCategoryBuilder.class
 com\uniminuto\velvet\model\dto\DocumentTypeDTO$UpdateDocumentType.class
 com\uniminuto\velvet\model\entity\User.class
@@ -158,6 +175,7 @@ com\uniminuto\velvet\model\dto\ResourceDTO$UpdateResource.class
 com\uniminuto\velvet\model\dto\TablesDTO$CreateTable.class
 com\uniminuto\velvet\model\repository\UserRepository.class
 com\uniminuto\velvet\model\mapper\InventoryMovementMapperImpl.class
+com\uniminuto\velvet\controller\DocumentTypeController.class
 com\uniminuto\velvet\model\entity\RolePermission.class
 com\uniminuto\velvet\model\dto\CategoryDTO$CategoryDetail$CategoryDetailBuilder.class
 com\uniminuto\velvet\model\dto\OrderDTO$DetailsOrder$DetailsOrderBuilder.class
@@ -181,6 +199,7 @@ com\uniminuto\velvet\model\dto\RolePermissionDTO$AssignRolePermission$AssignRole
 com\uniminuto\velvet\model\dto\RolePermissionDTO$AssignRolePermission.class
 com\uniminuto\velvet\model\dto\ProductCompositionDTO$UpdateProductComposition.class
 com\uniminuto\velvet\model\mapper\ProductMapperImpl.class
+com\uniminuto\velvet\service\impl\ProductTypeServiceImpl.class
 com\uniminuto\velvet\model\dto\CategoryDTO.class
 com\uniminuto\velvet\model\dto\OrderDTO$CreateOrder.class
 com\uniminuto\velvet\model\dto\UnitOfMeasureDTO$UpdateUnitOfMeasure.class
@@ -193,6 +212,7 @@ com\uniminuto\velvet\model\dto\InventoryMovementDTO.class
 com\uniminuto\velvet\model\dto\LocationDTO$CreateLocation$CreateLocationBuilder.class
 com\uniminuto\velvet\model\dto\ProductCompositionDTO$UpdateProductComposition$UpdateProductCompositionBuilder.class
 com\uniminuto\velvet\model\dto\RoleDTO$DetailsRole$DetailsRoleBuilder.class
+com\uniminuto\velvet\service\interfaces\UnitOfMeasureService.class
 com\uniminuto\velvet\model\entity\MovementType.class
 com\uniminuto\velvet\model\dto\ProductCompositionDTO$CreateProductComposition$CreateProductCompositionBuilder.class
 com\uniminuto\velvet\model\repository\InventoryStockRepository.class
@@ -206,10 +226,12 @@ com\uniminuto\velvet\model\dto\UnitOfMeasureDTO.class
 com\uniminuto\velvet\model\mapper\CategoryMapperImpl.class
 com\uniminuto\velvet\model\dto\SubCategoryDTO$CreateSubCategory$CreateSubCategoryBuilder.class
 com\uniminuto\velvet\model\dto\UnitOfMeasureDTO$CreateUnitOfMeasure.class
+com\uniminuto\velvet\controller\MovementTypeController.class
 com\uniminuto\velvet\model\mapper\InventoryLimitsMapperImpl.class
 com\uniminuto\velvet\model\dto\OrderStatusDTO$CreateOrderStatus.class
 com\uniminuto\velvet\model\mapper\UserMapperImpl.class
 com\uniminuto\velvet\model\dto\InventoryStockDTO$DetailsInventoryStock.class
+com\uniminuto\velvet\controller\RoleController.class
 com\uniminuto\velvet\model\dto\OrderDetailDTO$SimpleOrderDetail.class
 com\uniminuto\velvet\model\dto\PermissionDTO$DetailsPermission.class
 com\uniminuto\velvet\model\repository\CategoryRepository.class
@@ -246,6 +268,7 @@ com\uniminuto\velvet\model\dto\TablesDTO$SimpleTable.class
 com\uniminuto\velvet\model\repository\MovementTypeRepository.class
 com\uniminuto\velvet\model\dto\ResourceDTO$CreateResource$CreateResourceBuilder.class
 com\uniminuto\velvet\model\entity\DocumentType.class
+com\uniminuto\velvet\service\interfaces\RoleService.class
 com\uniminuto\velvet\model\dto\PermissionDTO$CreatePermission.class
 com\uniminuto\velvet\model\dto\UserDTO$UserDetails$UserDetailsBuilder.class
 com\uniminuto\velvet\model\dto\CategoryDTO$CreateCategory$CreateCategoryBuilder.class
@@ -255,6 +278,7 @@ com\uniminuto\velvet\model\dto\RoleDTO$UpdateRole.class
 com\uniminuto\velvet\config\WebConfig.class
 com\uniminuto\velvet\model\dto\InventoryStockDTO$UpdateInventoryStock.class
 com\uniminuto\velvet\model\dto\TablesDTO$SimpleTable$SimpleTableBuilder.class
+com\uniminuto\velvet\service\interfaces\OrderStatusService.class
 com\uniminuto\velvet\model\dto\RoleDTO$SimpleRole.class
 com\uniminuto\velvet\model\dto\SubCategoryDTO$DetailsSubCategory$DetailsSubCategoryBuilder.class
 com\uniminuto\velvet\model\dto\InventoryStockDTO$DetailsInventoryStock$DetailsInventoryStockBuilder.class
@@ -270,6 +294,7 @@ com\uniminuto\velvet\model\mapper\ResourceMapper.class
 com\uniminuto\velvet\model\dto\DocumentTypeDTO$CreateDocumentType.class
 com\uniminuto\velvet\model\mapper\ProductCompositionMapper.class
 com\uniminuto\velvet\model\entity\Product.class
+com\uniminuto\velvet\service\interfaces\LocationService.class
 com\uniminuto\velvet\model\dto\ProductCompositionDTO$SimpleProductComposition$SimpleProductCompositionBuilder.class
 com\uniminuto\velvet\model\dto\LocationDTO$DetailsLocation.class
 com\uniminuto\velvet\model\dto\UnitOfMeasureDTO$DetailsUnitOfMeasure$DetailsUnitOfMeasureBuilder.class
@@ -286,7 +311,9 @@ com\uniminuto\velvet\model\mapper\InventoryStockMapper.class
 com\uniminuto\velvet\model\dto\InventoryMovementDTO$CreateInventoryMovement.class
 com\uniminuto\velvet\model\dto\LocationDTO.class
 com\uniminuto\velvet\model\repository\OrderRepository.class
+com\uniminuto\velvet\service\impl\OrderStatusServiceImpl.class
 com\uniminuto\velvet\model\repository\PermissionRepository.class
+com\uniminuto\velvet\controller\OrderStatusController.class
 com\uniminuto\velvet\model\mapper\ResourceMapperImpl.class
 com\uniminuto\velvet\model\dto\PermissionDTO$DetailsPermission$DetailsPermissionBuilder.class
 com\uniminuto\velvet\model\dto\PermissionDTO$UpdatePermission.class
@@ -302,6 +329,7 @@ com\uniminuto\velvet\config\SecurityConfig.class
 com\uniminuto\velvet\model\dto\SubCategoryDTO$SimpleSubCategory$SimpleSubCategoryBuilder.class
 com\uniminuto\velvet\model\dto\RolePermissionDTO.class
 com\uniminuto\velvet\model\dto\RoleDTO$DetailsRole.class
+com\uniminuto\velvet\service\interfaces\PaymentMethodService.class
 com\uniminuto\velvet\controller\ResourceController.class
 com\uniminuto\velvet\model\mapper\RoleMapperImpl.class
 com\uniminuto\velvet\model\dto\CategoryDTO$UpdateCategory$UpdateCategoryBuilder.class
