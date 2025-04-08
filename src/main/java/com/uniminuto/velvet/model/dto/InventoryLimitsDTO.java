@@ -54,7 +54,6 @@ public class InventoryLimitsDTO {
     private Long id;
     private Long productId;
     private String productName;
-    private String productSku;
     private Long locationId;
     private String locationName;
     private Long minStock;

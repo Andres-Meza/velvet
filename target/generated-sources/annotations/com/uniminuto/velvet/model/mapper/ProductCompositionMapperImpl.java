@@ -11,21 +11,26 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-04-02T09:15:13-0500",
+    date = "2025-04-07T22:03:42-0500",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.5 (Eclipse Adoptium)"
 )
 @Component
 public class ProductCompositionMapperImpl implements ProductCompositionMapper {
 
     @Override
-    public ProductComposition toEntity(ProductCompositionDTO.CreateProductComposition dto) {
-        if ( dto == null ) {
+    public ProductComposition ingredientItemToEntity(Long compositeProductId, ProductCompositionDTO.IngredientItem dto) {
+        if ( compositeProductId == null && dto == null ) {
             return null;
         }
 
         ProductComposition.ProductCompositionBuilder productComposition = ProductComposition.builder();
 
-        productComposition.quantity( dto.getQuantity() );
+        if ( dto != null ) {
+            productComposition.ingredientProduct( productIdToProduct( dto.getIngredientProductId() ) );
+            productComposition.unitOfMeasure( unitOfMeasureIdToUnitOfMeasure( dto.getUnitOfMeasureId() ) );
+            productComposition.quantity( dto.getQuantity() );
+        }
+        productComposition.compositeProduct( productIdToProduct( compositeProductId ) );
 
         return productComposition.build();
     }
@@ -36,6 +41,9 @@ public class ProductCompositionMapperImpl implements ProductCompositionMapper {
             return;
         }
 
+        if ( dto.getUnitOfMeasureId() != null ) {
+            entity.setUnitOfMeasure( unitOfMeasureIdToUnitOfMeasure( dto.getUnitOfMeasureId() ) );
+        }
         if ( dto.getId() != null ) {
             entity.setId( dto.getId() );
         }
