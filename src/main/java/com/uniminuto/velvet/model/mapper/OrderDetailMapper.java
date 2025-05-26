@@ -29,7 +29,7 @@ public interface OrderDetailMapper {
 
   // Convertir CreateOrderDetail DTO a entidad OrderDetail
   @Mapping(target = "id", ignore = true)
-  @Mapping(target = "order.id", source = "orderId")
+  @Mapping(target = "order", ignore = true)
   @Mapping(target = "product.id", source = "productId")
   OrderDetail toEntity(CreateOrderDetail dto);
 
@@ -42,6 +42,11 @@ public interface OrderDetailMapper {
       );
     }
   }
+
+  // Convertir UpdateOrderDetail DTO a entidad OrderDetail
+  @Mapping(target = "order.id", source = "orderId")
+  @Mapping(target = "product.id", source = "productId")
+  OrderDetail toEntity(UpdateOrderDetail dto);
 
   // Actualizar entidad OrderDetail desde UpdateOrderDetail DTO
   @Mapping(target = "order.id", source = "orderId")

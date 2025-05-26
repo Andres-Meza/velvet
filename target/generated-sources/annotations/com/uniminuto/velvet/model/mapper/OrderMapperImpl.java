@@ -2,7 +2,6 @@ package com.uniminuto.velvet.model.mapper;
 
 import com.uniminuto.velvet.model.dto.OrderDTO;
 import com.uniminuto.velvet.model.dto.OrderDetailDTO;
-import com.uniminuto.velvet.model.dto.OrderStatusDTO;
 import com.uniminuto.velvet.model.entity.Location;
 import com.uniminuto.velvet.model.entity.Order;
 import com.uniminuto.velvet.model.entity.OrderDetail;
@@ -18,7 +17,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-04-02T09:15:12-0500",
+    date = "2025-05-25T15:31:59-0500",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.5 (Eclipse Adoptium)"
 )
 @Component
@@ -40,6 +39,7 @@ public class OrderMapperImpl implements OrderMapper {
         order.table( createOrderToTables( dto ) );
         order.orderStatus( createOrderToOrderStatus( dto ) );
         order.paymentMethod( createOrderToPaymentMethod( dto ) );
+        order.paid( dto.isPaid() );
         order.totalAmount( dto.getTotalAmount() );
 
         order.orderDate( java.time.LocalDateTime.now() );
@@ -61,6 +61,9 @@ public class OrderMapperImpl implements OrderMapper {
             order.setPaymentMethod( PaymentMethod.builder().build() );
         }
         updateOrderToPaymentMethod( dto, order.getPaymentMethod() );
+        if ( dto.getPaid() != null ) {
+            order.setPaid( dto.getPaid() );
+        }
         if ( dto.getId() != null ) {
             order.setId( dto.getId() );
         }
@@ -103,6 +106,7 @@ public class OrderMapperImpl implements OrderMapper {
         detailsOrder.orderStatusName( entityOrderStatusName( entity ) );
         detailsOrder.paymentMethodName( entityPaymentMethodName( entity ) );
         detailsOrder.orderDetails( orderDetailMapper.toDetailResponseList( entity.getOrderDetails() ) );
+        detailsOrder.paid( entity.isPaid() );
         detailsOrder.id( entity.getId() );
         detailsOrder.orderNumber( entity.getOrderNumber() );
         detailsOrder.orderDate( entity.getOrderDate() );
@@ -128,6 +132,7 @@ public class OrderMapperImpl implements OrderMapper {
         simpleOrder.userName( entityUserName( entity ) );
         simpleOrder.userLastName( entityUserLastName( entity ) );
         simpleOrder.orderStatusName( entityOrderStatusName( entity ) );
+        simpleOrder.paid( entity.isPaid() );
         simpleOrder.id( entity.getId() );
         simpleOrder.orderNumber( entity.getOrderNumber() );
         simpleOrder.orderDate( entity.getOrderDate() );
@@ -151,7 +156,7 @@ public class OrderMapperImpl implements OrderMapper {
     }
 
     @Override
-    public void updateOrderStatus(OrderStatusDTO.UpdateOrderStatus dto, Order order) {
+    public void updateOrderStatus(OrderDTO.UpdateOrderStatus dto, Order order) {
         if ( dto == null ) {
             return;
         }
@@ -162,6 +167,9 @@ public class OrderMapperImpl implements OrderMapper {
         updateOrderStatusToOrderStatus( dto, order.getOrderStatus() );
         if ( dto.getId() != null ) {
             order.setId( dto.getId() );
+        }
+        if ( dto.getCompletedDate() != null ) {
+            order.setCompletedDate( dto.getCompletedDate() );
         }
     }
 
@@ -175,10 +183,10 @@ public class OrderMapperImpl implements OrderMapper {
             order.setPaymentMethod( PaymentMethod.builder().build() );
         }
         updatePaymentStatusToPaymentMethod( dto, order.getPaymentMethod() );
+        order.setPaid( dto.isPaid() );
         if ( dto.getId() != null ) {
             order.setId( dto.getId() );
         }
-        order.setPaid( dto.isPaid() );
     }
 
     protected User createOrderToUser(OrderDTO.CreateOrder createOrder) {
@@ -261,21 +269,6 @@ public class OrderMapperImpl implements OrderMapper {
         }
     }
 
-    protected OrderDetail updateOrderDetailToOrderDetail(OrderDetailDTO.UpdateOrderDetail updateOrderDetail) {
-        if ( updateOrderDetail == null ) {
-            return null;
-        }
-
-        OrderDetail.OrderDetailBuilder orderDetail = OrderDetail.builder();
-
-        orderDetail.id( updateOrderDetail.getId() );
-        orderDetail.quantity( updateOrderDetail.getQuantity() );
-        orderDetail.unitPrice( updateOrderDetail.getUnitPrice() );
-        orderDetail.productNotes( updateOrderDetail.getProductNotes() );
-
-        return orderDetail.build();
-    }
-
     protected List<OrderDetail> updateOrderDetailListToOrderDetailList(List<OrderDetailDTO.UpdateOrderDetail> list) {
         if ( list == null ) {
             return null;
@@ -283,7 +276,7 @@ public class OrderMapperImpl implements OrderMapper {
 
         List<OrderDetail> list1 = new ArrayList<OrderDetail>( list.size() );
         for ( OrderDetailDTO.UpdateOrderDetail updateOrderDetail : list ) {
-            list1.add( updateOrderDetailToOrderDetail( updateOrderDetail ) );
+            list1.add( orderDetailMapper.toEntity( updateOrderDetail ) );
         }
 
         return list1;
@@ -424,13 +417,13 @@ public class OrderMapperImpl implements OrderMapper {
         return name;
     }
 
-    protected void updateOrderStatusToOrderStatus(OrderStatusDTO.UpdateOrderStatus updateOrderStatus, OrderStatus mappingTarget) {
+    protected void updateOrderStatusToOrderStatus(OrderDTO.UpdateOrderStatus updateOrderStatus, OrderStatus mappingTarget) {
         if ( updateOrderStatus == null ) {
             return;
         }
 
-        if ( updateOrderStatus.getId() != null ) {
-            mappingTarget.setId( updateOrderStatus.getId() );
+        if ( updateOrderStatus.getOrderStatusId() != null ) {
+            mappingTarget.setId( updateOrderStatus.getOrderStatusId() );
         }
     }
 

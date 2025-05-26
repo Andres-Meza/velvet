@@ -39,9 +39,9 @@ public class OrderDTO {
     @Positive(message = "El monto total debe ser mayor a cero")
     @NotNull(message = "El monto total es obligatorio")
     private BigDecimal totalAmount;
-    
+
     @Builder.Default
-    private boolean isPaid = false;
+    private boolean paid = false;  // Cambio de isPaid a paid
   }
 
   @Data
@@ -53,14 +53,14 @@ public class OrderDTO {
     private Long id;
 
     private List<OrderDetailDTO.UpdateOrderDetail> orderDetails;
-    
+
     private Long paymentMethodId;
-    
+
     private Long orderStatusId;
-    
+
     private LocalDateTime completedDate;
-    
-    private Boolean isPaid;
+
+    private Boolean paid;  // Cambio de isPaid a paid
 
     @Positive(message = "El monto total debe ser mayor a cero")
     private BigDecimal totalAmount;
@@ -86,7 +86,7 @@ public class OrderDTO {
     private LocalDateTime orderDate;
     private LocalDateTime completedDate;
     private BigDecimal totalAmount;
-    private boolean isPaid;
+    private boolean paid;  // Cambio de isPaid a paid
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
   }
@@ -106,7 +106,7 @@ public class OrderDTO {
     private String orderStatusName;
     private LocalDateTime orderDate;
     private BigDecimal totalAmount;
-    private boolean isPaid;
+    private boolean paid;  // Cambio de isPaid a paid
   }
 
   @Data
@@ -116,13 +116,13 @@ public class OrderDTO {
   public static class UpdateOrderStatus {
     @NotNull(message = "El ID de la orden es obligatorio")
     private Long id;
-    
+
     @NotNull(message = "El estado de la orden es obligatorio")
     private Long orderStatusId;
-    
+
     private LocalDateTime completedDate;
   }
-  
+
   @Data
   @Builder
   @NoArgsConstructor
@@ -130,11 +130,11 @@ public class OrderDTO {
   public static class UpdatePaymentStatus {
     @NotNull(message = "El ID de la orden es obligatorio")
     private Long id;
-    
+
     @NotNull(message = "El método de pago es obligatorio")
     private Long paymentMethodId;
-    
+
     @NotNull(message = "El estado de pago es obligatorio")
-    private boolean isPaid;
+    private boolean paid;  // Cambio de isPaid a paid
   }
 }

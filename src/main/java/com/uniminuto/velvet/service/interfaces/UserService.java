@@ -1,6 +1,7 @@
 package com.uniminuto.velvet.service.interfaces;
 
 import com.uniminuto.velvet.model.dto.UserDTO;
+import com.uniminuto.velvet.model.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -105,4 +106,11 @@ public interface UserService {
      * @return los detalles del usuario actualizado
      */
     UserDTO.UserDetails toggleUserActive(Long id, Boolean active);
+
+    /**
+     * Busca un usuario (entidad) por su nombre de usuario para autenticación
+     * @param username Nombre de usuario
+     * @return Optional con la entidad User o vacío si no existe
+     */
+    Optional<User> findUserEntityByUsername(String username);
 }

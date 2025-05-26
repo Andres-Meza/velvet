@@ -182,6 +182,12 @@ public class UserServiceImpl implements UserService {
         return userMapper.userToUserDetailsDto(updatedUser);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<User> findUserEntityByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
     /**
      * Valida que no existan duplicados de username, email o documento
      */

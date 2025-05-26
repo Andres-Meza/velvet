@@ -21,7 +21,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class Order {
-  
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
@@ -57,7 +57,7 @@ public class Order {
 
   @Column(name = "is_paid", nullable = false)
   @Builder.Default
-  private boolean isPaid = false;
+  private boolean paid = false;
 
   @Column(name = "order_date", nullable = false)
   private LocalDateTime orderDate;

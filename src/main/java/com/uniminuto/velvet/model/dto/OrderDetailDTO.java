@@ -16,20 +16,18 @@ public class OrderDetailDTO {
   @NoArgsConstructor
   @AllArgsConstructor
   public static class CreateOrderDetail {
-    @NotNull(message = "El ID de la orden es obligatorio")
-    private Long orderId;
-  
+    // Se elimina la referencia al orderId ya que será asignado por el servicio
     @NotNull(message = "El ID del producto es obligatorio")
     private Long productId;
-  
+
     @NotNull(message = "La cantidad es obligatoria")
     @Min(value = 1, message = "La cantidad debe ser al menos 1")
     private Integer quantity;
-    
+
     @NotNull(message = "El precio unitario es obligatorio")
     @DecimalMin(value = "0.0", inclusive = false, message = "El precio unitario debe ser mayor que cero")
     private BigDecimal unitPrice;
-  
+
     private String productNotes;
   }
 
@@ -40,17 +38,17 @@ public class OrderDetailDTO {
   public static class UpdateOrderDetail {
     @NotNull(message = "El ID del detalle de orden es obligatorio")
     private Long id;
-    
+
     private Long orderId;
-    
+
     private Long productId;
-    
+
     @Min(value = 1, message = "La cantidad debe ser al menos 1")
     private Integer quantity;
-    
+
     @DecimalMin(value = "0.0", inclusive = false, message = "El precio unitario debe ser mayor que cero")
     private BigDecimal unitPrice;
-    
+
     private String productNotes;
   }
 
@@ -84,7 +82,7 @@ public class OrderDetailDTO {
     private BigDecimal unitPrice;
     private BigDecimal subtotal;
   }
-  
+
   @Data
   @Builder
   @NoArgsConstructor

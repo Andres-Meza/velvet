@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-04-02T09:15:12-0500",
+    date = "2025-05-25T15:31:59-0500",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.5 (Eclipse Adoptium)"
 )
 @Component
@@ -25,8 +25,25 @@ public class OrderDetailMapperImpl implements OrderDetailMapper {
 
         OrderDetail.OrderDetailBuilder orderDetail = OrderDetail.builder();
 
-        orderDetail.order( createOrderDetailToOrder( dto ) );
         orderDetail.product( createOrderDetailToProduct( dto ) );
+        orderDetail.quantity( dto.getQuantity() );
+        orderDetail.unitPrice( dto.getUnitPrice() );
+        orderDetail.productNotes( dto.getProductNotes() );
+
+        return orderDetail.build();
+    }
+
+    @Override
+    public OrderDetail toEntity(OrderDetailDTO.UpdateOrderDetail dto) {
+        if ( dto == null ) {
+            return null;
+        }
+
+        OrderDetail.OrderDetailBuilder orderDetail = OrderDetail.builder();
+
+        orderDetail.order( updateOrderDetailToOrder( dto ) );
+        orderDetail.product( updateOrderDetailToProduct( dto ) );
+        orderDetail.id( dto.getId() );
         orderDetail.quantity( dto.getQuantity() );
         orderDetail.unitPrice( dto.getUnitPrice() );
         orderDetail.productNotes( dto.getProductNotes() );
@@ -43,11 +60,11 @@ public class OrderDetailMapperImpl implements OrderDetailMapper {
         if ( entity.getOrder() == null ) {
             entity.setOrder( Order.builder().build() );
         }
-        updateOrderDetailToOrder( dto, entity.getOrder() );
+        updateOrderDetailToOrder1( dto, entity.getOrder() );
         if ( entity.getProduct() == null ) {
             entity.setProduct( Product.builder().build() );
         }
-        updateOrderDetailToProduct( dto, entity.getProduct() );
+        updateOrderDetailToProduct1( dto, entity.getProduct() );
         if ( dto.getId() != null ) {
             entity.setId( dto.getId() );
         }
@@ -149,18 +166,6 @@ public class OrderDetailMapperImpl implements OrderDetailMapper {
         return orderDetailsByProduct.build();
     }
 
-    protected Order createOrderDetailToOrder(OrderDetailDTO.CreateOrderDetail createOrderDetail) {
-        if ( createOrderDetail == null ) {
-            return null;
-        }
-
-        Order.OrderBuilder order = Order.builder();
-
-        order.id( createOrderDetail.getOrderId() );
-
-        return order.build();
-    }
-
     protected Product createOrderDetailToProduct(OrderDetailDTO.CreateOrderDetail createOrderDetail) {
         if ( createOrderDetail == null ) {
             return null;
@@ -173,7 +178,31 @@ public class OrderDetailMapperImpl implements OrderDetailMapper {
         return product.build();
     }
 
-    protected void updateOrderDetailToOrder(OrderDetailDTO.UpdateOrderDetail updateOrderDetail, Order mappingTarget) {
+    protected Order updateOrderDetailToOrder(OrderDetailDTO.UpdateOrderDetail updateOrderDetail) {
+        if ( updateOrderDetail == null ) {
+            return null;
+        }
+
+        Order.OrderBuilder order = Order.builder();
+
+        order.id( updateOrderDetail.getOrderId() );
+
+        return order.build();
+    }
+
+    protected Product updateOrderDetailToProduct(OrderDetailDTO.UpdateOrderDetail updateOrderDetail) {
+        if ( updateOrderDetail == null ) {
+            return null;
+        }
+
+        Product.ProductBuilder product = Product.builder();
+
+        product.id( updateOrderDetail.getProductId() );
+
+        return product.build();
+    }
+
+    protected void updateOrderDetailToOrder1(OrderDetailDTO.UpdateOrderDetail updateOrderDetail, Order mappingTarget) {
         if ( updateOrderDetail == null ) {
             return;
         }
@@ -183,7 +212,7 @@ public class OrderDetailMapperImpl implements OrderDetailMapper {
         }
     }
 
-    protected void updateOrderDetailToProduct(OrderDetailDTO.UpdateOrderDetail updateOrderDetail, Product mappingTarget) {
+    protected void updateOrderDetailToProduct1(OrderDetailDTO.UpdateOrderDetail updateOrderDetail, Product mappingTarget) {
         if ( updateOrderDetail == null ) {
             return;
         }
