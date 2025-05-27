@@ -27,6 +27,7 @@ com\uniminuto\velvet\model\dto\auth\AuthResponse$UserInfo$UserInfoBuilder.class
 com\uniminuto\velvet\service\impl\PaymentMethodServiceImpl.class
 com\uniminuto\velvet\model\dto\ProductCompositionDTO$IngredientItem.class
 com\uniminuto\velvet\model\dto\MovementTypeDTO$SimpleMovementType$SimpleMovementTypeBuilder.class
+com\uniminuto\velvet\controller\ProductExportController.class
 com\uniminuto\velvet\model\dto\TablesDTO$UpdateTable.class
 com\uniminuto\velvet\service\interfaces\ProductCompositionService.class
 com\uniminuto\velvet\controller\CategoryController.class
@@ -60,6 +61,7 @@ com\uniminuto\velvet\model\dto\OrderDTO$UpdateOrder.class
 com\uniminuto\velvet\controller\InventoryStockController.class
 com\uniminuto\velvet\config\JwtAuthenticationEntryPoint.class
 com\uniminuto\velvet\model\dto\PaymentMethodDTO$SimplePaymentMethod.class
+com\uniminuto\velvet\service\impl\ProductExportServiceImpl.class
 com\uniminuto\velvet\model\dto\UserDTO$UpdatePassword$UpdatePasswordBuilder.class
 com\uniminuto\velvet\model\repository\ProductTypeRepository.class
 com\uniminuto\velvet\model\mapper\RolePermissionMapperImpl.class
@@ -113,6 +115,7 @@ com\uniminuto\velvet\model\entity\Category.class
 com\uniminuto\velvet\service\impl\PermissionServiceImpl.class
 com\uniminuto\velvet\model\dto\OrderDetailDTO$UpdateOrderDetail.class
 com\uniminuto\velvet\model\mapper\OrderMapperImpl.class
+com\uniminuto\velvet\service\interfaces\ExportService.class
 com\uniminuto\velvet\model\dto\DocumentTypeDTO$UpdateDocumentType$UpdateDocumentTypeBuilder.class
 com\uniminuto\velvet\model\mapper\PaymentMethodMapper.class
 com\uniminuto\velvet\model\mapper\ProductCompositionMapperImpl.class
@@ -166,6 +169,7 @@ com\uniminuto\velvet\model\dto\OrderDTO$UpdateOrderStatus.class
 com\uniminuto\velvet\exception\InvalidOperationException.class
 com\uniminuto\velvet\model\dto\DocumentTypeDTO$CreateDocumentType.class
 com\uniminuto\velvet\service\impl\OrderServiceImpl.class
+com\uniminuto\velvet\service\impl\ExportServiceImpl.class
 com\uniminuto\velvet\model\entity\Product.class
 com\uniminuto\velvet\service\interfaces\LocationService.class
 com\uniminuto\velvet\model\dto\LocationDTO$DetailsLocation.class
@@ -295,6 +299,7 @@ com\uniminuto\velvet\service\impl\InventoryLimitsServiceImpl.class
 com\uniminuto\velvet\model\dto\ProductTypeDTO$DetailsProductType$DetailsProductTypeBuilder.class
 com\uniminuto\velvet\model\dto\LocationDTO$UpdateLocation.class
 com\uniminuto\velvet\service\impl\OrderDetailServiceImpl.class
+com\uniminuto\velvet\service\interfaces\ProductExportService.class
 com\uniminuto\velvet\model\dto\OrderDetailDTO$OrderDetailsByProduct$OrderDetailsByProductBuilder.class
 com\uniminuto\velvet\model\entity\Order$OrderBuilder.class
 com\uniminuto\velvet\model\dto\ResourceDTO$DetailsResource.class
@@ -342,8 +347,8 @@ com\uniminuto\velvet\model\dto\ResourceDTO$DetailsResource$DetailsResourceBuilde
 com\uniminuto\velvet\model\dto\auth\RefreshTokenRequest.class
 com\uniminuto\velvet\model\dto\ProductCompositionDTO$CreateCompositeProduct$CreateCompositeProductBuilder.class
 com\uniminuto\velvet\model\mapper\LocationMapper.class
-com\uniminuto\velvet\service\JwtService.class
 com\uniminuto\velvet\model\mapper\PermissionMapper.class
+com\uniminuto\velvet\config\PasswordConfig.class
 com\uniminuto\velvet\model\dto\ProductDTO$CreateProduct.class
 com\uniminuto\velvet\model\repository\ProductCompositionRepository.class
 com\uniminuto\velvet\model\dto\ResourceDTO$SimpleResource.class
@@ -360,6 +365,7 @@ com\uniminuto\velvet\model\dto\MovementTypeDTO$DetailsMovementType.class
 com\uniminuto\velvet\model\mapper\SubCategoryMapper.class
 com\uniminuto\velvet\model\dto\UserDTO$UpdateUser.class
 com\uniminuto\velvet\model\repository\MovementTypeRepository.class
+com\uniminuto\velvet\controller\ExportController.class
 com\uniminuto\velvet\model\entity\DocumentType.class
 com\uniminuto\velvet\service\interfaces\RoleService.class
 com\uniminuto\velvet\model\dto\PermissionDTO$CreatePermission.class
