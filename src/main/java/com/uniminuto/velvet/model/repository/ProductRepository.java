@@ -34,4 +34,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
      * Verifica si existe un producto con el nombre exacto (ignorando mayúsculas/minúsculas)
      */
     boolean existsByNameIgnoreCase(String name);
+
+    Page<Product> findByActive(boolean active, Pageable pageable);
 }

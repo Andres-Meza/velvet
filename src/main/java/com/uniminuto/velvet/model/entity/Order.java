@@ -53,7 +53,7 @@ public class Order {
   private PaymentMethod paymentMethod;
 
   @Column(name = "total_amount", nullable = false, precision = 10, scale = 2)
-  private BigDecimal totalAmount;
+  private BigDecimal totalAmount = BigDecimal.ZERO;
 
   @Column(name = "is_paid", nullable = false)
   @Builder.Default
@@ -79,7 +79,6 @@ public class Order {
   @ToString.Exclude
   private List<OrderDetail> orderDetails = new ArrayList<>();
 
-  // Métodos auxiliares
   public void addOrderDetail(OrderDetail detail) {
     orderDetails.add(detail);
     detail.setOrder(this);
@@ -88,5 +87,18 @@ public class Order {
   public void removeOrderDetail(OrderDetail detail) {
     orderDetails.remove(detail);
     detail.setOrder(null);
+  }
+
+  @PrePersist
+  @PreUpdate
+  private void calculateTotalAmount() {
+    if (orderDetails != null && !orderDetails.isEmpty()) {
+      this.totalAmount = orderDetails.stream()
+              .map(OrderDetail::getSubtotal)
+              .filter(java.util.Objects::nonNull)
+              .reduce(BigDecimal.ZERO, BigDecimal::add);
+    } else {
+      this.totalAmount = BigDecimal.ZERO;
+    }
   }
 }

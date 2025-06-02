@@ -31,16 +31,13 @@ public class ProductController {
     public ResponseEntity<ApiResponse<DetailsProduct>> createProduct(@RequestBody @Validated CreateProduct createProductDTO) {
         log.info("REST request para crear un nuevo producto");
 
-        // Verificar si ya existe un producto con el mismo nombre
         if (productService.existsByName(createProductDTO.getName())) {
-            return ResponseEntity
-                    .status(HttpStatus.CONFLICT)
+            return ResponseEntity.status(HttpStatus.CONFLICT)
                     .body(new ApiResponse<>(false, "Ya existe un producto con el nombre: " + createProductDTO.getName(), null));
         }
 
         DetailsProduct product = productService.createProduct(createProductDTO);
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
+        return ResponseEntity.status(HttpStatus.CREATED)
                 .body(new ApiResponse<>(true, "Producto creado exitosamente", product));
     }
 
@@ -52,8 +49,7 @@ public class ProductController {
             DetailsProduct product = productService.updateProduct(updateProductDTO);
             return ResponseEntity.ok(new ApiResponse<>(true, "Producto actualizado exitosamente", product));
         } catch (Exception e) {
-            return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(new ApiResponse<>(false, e.getMessage(), null));
         }
     }
@@ -64,8 +60,7 @@ public class ProductController {
 
         return productService.getProductById(id)
                 .map(product -> ResponseEntity.ok(new ApiResponse<>(true, "Producto encontrado", product)))
-                .orElse(ResponseEntity
-                        .status(HttpStatus.NOT_FOUND)
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND)
                         .body(new ApiResponse<>(false, "Producto no encontrado con ID: " + id, null)));
     }
 
@@ -119,8 +114,7 @@ public class ProductController {
             String message = active ? "Producto activado exitosamente" : "Producto desactivado exitosamente";
             return ResponseEntity.ok(new ApiResponse<>(true, message, product));
         } catch (Exception e) {
-            return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(new ApiResponse<>(false, e.getMessage(), null));
         }
     }
@@ -144,5 +138,15 @@ public class ProductController {
         response.put("exists", exists);
 
         return ResponseEntity.ok(new ApiResponse<>(true, "Verificación completada", response));
+    }
+
+    @GetMapping("/by-status")
+    public ResponseEntity<ApiResponse<Page<SimpleProduct>>> getProductsByStatus(
+            @RequestParam boolean active,
+            @PageableDefault(size = 10, sort = "id") Pageable pageable) {
+        log.info("REST request para obtener productos por estado activo: {}", active);
+
+        Page<SimpleProduct> productsPage = productService.getProductsByStatus(active, pageable);
+        return ResponseEntity.ok(new ApiResponse<>(true, "Productos filtrados por estado recuperados exitosamente", productsPage));
     }
 }

@@ -56,45 +56,35 @@ public class ProductServiceImpl implements ProductService {
     @Transactional(readOnly = true)
     public Optional<DetailsProduct> getProductById(Long id) {
         log.info("Buscando producto con ID: {}", id);
-
-        return productRepository.findById(id)
-                .map(productMapper::toDetailsDTO);
+        return productRepository.findById(id).map(productMapper::toDetailsDTO);
     }
 
     @Override
     @Transactional(readOnly = true)
     public Page<SimpleProduct> getAllProducts(Pageable pageable) {
         log.info("Obteniendo productos paginados");
-
-        return productRepository.findAll(pageable)
-                .map(productMapper::toSimpleDTO);
+        return productRepository.findAll(pageable).map(productMapper::toSimpleDTO);
     }
 
     @Override
     @Transactional(readOnly = true)
     public Page<SimpleProduct> getProductsByProductType(Long productTypeId, Pageable pageable) {
         log.info("Buscando productos por tipo de producto ID: {}", productTypeId);
-
-        return productRepository.findByProductTypeId(productTypeId, pageable)
-                .map(productMapper::toSimpleDTO);
+        return productRepository.findByProductTypeId(productTypeId, pageable).map(productMapper::toSimpleDTO);
     }
 
     @Override
     @Transactional(readOnly = true)
     public Page<SimpleProduct> getProductsBySubCategory(Long subCategoryId, Pageable pageable) {
         log.info("Buscando productos por subcategoría ID: {}", subCategoryId);
-
-        return productRepository.findBySubCategoryId(subCategoryId, pageable)
-                .map(productMapper::toSimpleDTO);
+        return productRepository.findBySubCategoryId(subCategoryId, pageable).map(productMapper::toSimpleDTO);
     }
 
     @Override
     @Transactional(readOnly = true)
     public Page<SimpleProduct> getProductsByCategory(Long categoryId, Pageable pageable) {
         log.info("Buscando productos por categoría ID: {}", categoryId);
-
-        return productRepository.findBySubCategoryCategoryId(categoryId, pageable)
-                .map(productMapper::toSimpleDTO);
+        return productRepository.findBySubCategoryCategoryId(categoryId, pageable).map(productMapper::toSimpleDTO);
     }
 
     @Override
@@ -125,7 +115,14 @@ public class ProductServiceImpl implements ProductService {
     @Transactional(readOnly = true)
     public boolean existsByName(String name) {
         log.info("Verificando si existe producto con nombre: {}", name);
-
         return productRepository.existsByNameIgnoreCase(name);
+    }
+
+    // ✅ NUEVO MÉTODO
+    @Override
+    @Transactional(readOnly = true)
+    public Page<SimpleProduct> getProductsByStatus(boolean active, Pageable pageable) {
+        log.info("Obteniendo productos con estado activo={}", active);
+        return productRepository.findByActive(active, pageable).map(productMapper::toSimpleDTO);
     }
 }

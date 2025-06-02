@@ -34,7 +34,7 @@ public interface OrderMapper {
   @Mapping(target = "location.id", source = "locationId")
   @Mapping(target = "table.id", source = "tableId")
   @Mapping(target = "orderStatus.id", source = "orderStatusId")
-  @Mapping(target = "paymentMethod.id", source = "paymentMethodId")
+//  @Mapping(target = "paymentMethod.id", source = "paymentMethodId")
   @Mapping(target = "orderDate", expression = "java(java.time.LocalDateTime.now())")
   @Mapping(target = "createdAt", ignore = true)
   @Mapping(target = "updatedAt", ignore = true)

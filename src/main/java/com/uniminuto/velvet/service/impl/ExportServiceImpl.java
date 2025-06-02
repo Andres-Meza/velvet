@@ -5,6 +5,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.*;
@@ -24,27 +26,32 @@ public class ExportServiceImpl implements ExportService {
     private final InventoryMovementRepository movementRepository;
 
     @Override
-    public ByteArrayInputStream generarReporteVentas(String sede, LocalDate fechaInicio, LocalDate fechaFin) {
-        List<InventoryMovement> movimientos = movementRepository.findByFilters(sede, fechaInicio, fechaFin);
+    public ByteArrayInputStream generarReporteVentas(String statusName, Long locationId, LocalDate fechaInicio, LocalDate fechaFin) {
+        // ✅ Conversión a LocalDateTime
+        LocalDateTime startDate = fechaInicio.atStartOfDay();
+        LocalDateTime endDate = fechaFin.atTime(LocalTime.MAX);
+
+        List<InventoryMovement> movimientos = movementRepository.findVentasPorEstadoYSedeYFecha(
+                statusName, locationId, startDate, endDate
+        );
 
         try (Workbook workbook = new XSSFWorkbook(); ByteArrayOutputStream out = new ByteArrayOutputStream()) {
             Sheet sheet = workbook.createSheet("Ventas");
 
-            String[] headers = {"Código", "Nombre", "Valor Costo", "Valor Venta", "Ganancia", "Sede", "Cantidad"};
+            String[] headers = {"Código", "Nombre", "Valor Costo", "Valor Venta", "Ganancia", "Sede", "Cantidad", "Fecha"};
             Row headerRow = sheet.createRow(0);
             for (int i = 0; i < headers.length; i++) {
-                Cell cell = headerRow.createCell(i);
-                cell.setCellValue(headers[i]);
+                headerRow.createCell(i).setCellValue(headers[i]);
             }
 
             int rowIdx = 1;
             for (InventoryMovement mov : movimientos) {
-                Row row = sheet.createRow(rowIdx++);
                 var product = mov.getProduct();
                 BigDecimal costo = mov.getUnitCost();
                 BigDecimal venta = product.getSalePrice();
                 BigDecimal ganancia = venta.subtract(costo);
 
+                Row row = sheet.createRow(rowIdx++);
                 row.createCell(0).setCellValue(product.getId());
                 row.createCell(1).setCellValue(product.getName());
                 row.createCell(2).setCellValue(costo.doubleValue());
@@ -52,6 +59,7 @@ public class ExportServiceImpl implements ExportService {
                 row.createCell(4).setCellValue(ganancia.doubleValue());
                 row.createCell(5).setCellValue(mov.getInventoryStock().getLocation().getName());
                 row.createCell(6).setCellValue(mov.getQuantity());
+                row.createCell(7).setCellValue(mov.getMovementDate().toString());
             }
 
             workbook.write(out);

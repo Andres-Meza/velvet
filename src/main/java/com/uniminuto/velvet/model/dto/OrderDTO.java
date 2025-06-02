@@ -36,12 +36,8 @@ public class OrderDTO {
     @NotNull(message = "El estado de la orden es obligatorio")
     private Long orderStatusId;
 
-    @Positive(message = "El monto total debe ser mayor a cero")
-    @NotNull(message = "El monto total es obligatorio")
-    private BigDecimal totalAmount;
-
     @Builder.Default
-    private boolean paid = false;  // Cambio de isPaid a paid
+    private boolean paid = false;
   }
 
   @Data

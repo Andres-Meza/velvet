@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-05-26T21:15:42-0500",
+    date = "2025-05-29T16:40:00-0500",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.5 (Eclipse Adoptium)"
 )
 @Component
@@ -38,9 +38,7 @@ public class OrderMapperImpl implements OrderMapper {
         order.location( createOrderToLocation( dto ) );
         order.table( createOrderToTables( dto ) );
         order.orderStatus( createOrderToOrderStatus( dto ) );
-        order.paymentMethod( createOrderToPaymentMethod( dto ) );
         order.paid( dto.isPaid() );
-        order.totalAmount( dto.getTotalAmount() );
 
         order.orderDate( java.time.LocalDateTime.now() );
 
@@ -235,18 +233,6 @@ public class OrderMapperImpl implements OrderMapper {
         orderStatus.id( createOrder.getOrderStatusId() );
 
         return orderStatus.build();
-    }
-
-    protected PaymentMethod createOrderToPaymentMethod(OrderDTO.CreateOrder createOrder) {
-        if ( createOrder == null ) {
-            return null;
-        }
-
-        PaymentMethod.PaymentMethodBuilder paymentMethod = PaymentMethod.builder();
-
-        paymentMethod.id( createOrder.getPaymentMethodId() );
-
-        return paymentMethod.build();
     }
 
     protected void updateOrderToOrderStatus(OrderDTO.UpdateOrder updateOrder, OrderStatus mappingTarget) {

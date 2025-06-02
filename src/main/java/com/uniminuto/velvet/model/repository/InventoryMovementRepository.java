@@ -55,4 +55,15 @@ public interface InventoryMovementRepository extends JpaRepository<InventoryMove
   """)
   List<InventoryMovement> findByFilters(Long locationId, LocalDate startDate, LocalDate endDate);
 
+    @Query("SELECT m FROM InventoryMovement m " +
+            "JOIN m.order o " +
+            "WHERE o.orderStatus.name = :statusName " +
+            "AND (:locationId IS NULL OR m.inventoryStock.location.id = :locationId) " +
+            "AND m.movementDate BETWEEN :startDate AND :endDate")
+    List<InventoryMovement> findVentasPorEstadoYSedeYFecha(
+            @Param("statusName") String statusName,
+            @Param("locationId") Long locationId,
+            @Param("startDate") LocalDateTime startDate,
+            @Param("endDate") LocalDateTime endDate
+    );
 }

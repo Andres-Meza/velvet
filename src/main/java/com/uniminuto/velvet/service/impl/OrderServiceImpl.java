@@ -1,32 +1,23 @@
 package com.uniminuto.velvet.service.impl;
 
-import com.uniminuto.velvet.model.dto.OrderDTO.CreateOrder;
-import com.uniminuto.velvet.model.dto.OrderDTO.DetailsOrder;
-import com.uniminuto.velvet.model.dto.OrderDTO.SimpleOrder;
-import com.uniminuto.velvet.model.dto.OrderDTO.UpdateOrder;
-import com.uniminuto.velvet.model.dto.OrderDTO.UpdateOrderStatus;
-import com.uniminuto.velvet.model.dto.OrderDTO.UpdatePaymentStatus;
-import com.uniminuto.velvet.model.entity.Order;
-import com.uniminuto.velvet.model.entity.OrderDetail;
+import com.uniminuto.velvet.exception.ResourceNotFoundException;
+import com.uniminuto.velvet.model.dto.InventoryMovementDTO.CreateInventoryMovement;
+import com.uniminuto.velvet.model.dto.OrderDTO.*;
+import com.uniminuto.velvet.model.entity.*;
 import com.uniminuto.velvet.model.mapper.OrderDetailMapper;
 import com.uniminuto.velvet.model.mapper.OrderMapper;
-import com.uniminuto.velvet.model.repository.OrderRepository;
-import com.uniminuto.velvet.model.repository.OrderStatusRepository;
-import com.uniminuto.velvet.model.repository.PaymentMethodRepository;
-import com.uniminuto.velvet.model.repository.TablesRepository;
-import com.uniminuto.velvet.model.repository.UserRepository;
-import com.uniminuto.velvet.model.repository.LocationRepository;
+import com.uniminuto.velvet.model.repository.*;
+import com.uniminuto.velvet.service.interfaces.InventoryMovementService;
 import com.uniminuto.velvet.service.interfaces.OrderService;
-import com.uniminuto.velvet.exception.ResourceNotFoundException;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
-
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
@@ -42,13 +33,17 @@ public class OrderServiceImpl implements OrderService {
     private final OrderMapper orderMapper;
     private final OrderDetailMapper orderDetailMapper;
 
+    // Nuevas dependencias para movimientos de inventario
+    private final InventoryMovementService inventoryMovementService;
+    private final MovementTypeRepository movementTypeRepository;
+    private final InventoryStockRepository inventoryStockRepository;
+
     @Override
     @Transactional
     public DetailsOrder createOrder(CreateOrder createOrderDTO) {
         log.info("Creando nueva orden con usuario ID: {}, ubicación ID: {}",
                 createOrderDTO.getUserId(), createOrderDTO.getLocationId());
 
-        // Validar que existen las entidades relacionadas
         userRepository.findById(createOrderDTO.getUserId())
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con ID: " + createOrderDTO.getUserId()));
 
@@ -70,30 +65,51 @@ public class OrderServiceImpl implements OrderService {
 
         // Mapear DTO a entidad
         Order newOrder = orderMapper.toEntity(createOrderDTO);
-
-        // Generar número de orden único
         newOrder.setOrderNumber(generateOrderNumber());
-        newOrder.setTotalAmount(createOrderDTO.getTotalAmount());
-        newOrder.setPaid(createOrderDTO.isPaid());  // Nota: el getter sigue siendo isPaid por convención de Java
+        newOrder.setPaid(createOrderDTO.isPaid());
 
-        // Guardar la orden primero para obtener su ID
-        Order savedOrder = orderRepository.save(newOrder);
-
-        // Procesar detalles de la orden si existen
+        // Procesar detalles de la orden
         if (createOrderDTO.getOrderDetails() != null && !createOrderDTO.getOrderDetails().isEmpty()) {
             createOrderDTO.getOrderDetails().forEach(detailDTO -> {
                 OrderDetail detail = orderDetailMapper.toEntity(detailDTO);
-                detail.setOrder(savedOrder);
-                savedOrder.addOrderDetail(detail);
-            });
 
-            // Guardar la orden actualizada con sus detalles
-            orderRepository.save(savedOrder);
+                if (detail.getSubtotal() == null && detail.getQuantity() != null && detail.getUnitPrice() != null) {
+                    detail.setSubtotal(detail.getUnitPrice().multiply(BigDecimal.valueOf(detail.getQuantity())));
+                }
+
+                newOrder.addOrderDetail(detail);
+            });
         }
 
-        log.info("Orden creada exitosamente con ID: {} y número: {}",
-                savedOrder.getId(), savedOrder.getOrderNumber());
+        // Guardar orden
+        Order savedOrder = orderRepository.save(newOrder);
 
+        // Buscar tipo de movimiento SALIDA
+        MovementType salidaType = movementTypeRepository.findByName("SALIDA")
+                .orElseThrow(() -> new ResourceNotFoundException("Tipo de movimiento 'SALIDA' no encontrado"));
+
+        // Generar movimientos de inventario por cada detalle
+        for (OrderDetail detail : savedOrder.getOrderDetails()) {
+            InventoryStock stock = inventoryStockRepository.findByProductIdAndLocationId(
+                            detail.getProduct().getId(), savedOrder.getLocation().getId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Stock no encontrado para producto ID: " + detail.getProduct().getId()));
+
+            CreateInventoryMovement movimiento = CreateInventoryMovement.builder()
+                    .inventoryStockId(stock.getId())
+                    .productId(detail.getProduct().getId())
+                    .movementType(salidaType)
+                    .quantity(detail.getQuantity())
+                    .unitCost(detail.getUnitPrice())
+                    .orderId(savedOrder.getId())
+                    .createdById(savedOrder.getUser().getId())
+                    .reference("Orden #" + savedOrder.getOrderNumber())
+                    .notes("Movimiento automático generado por creación de orden")
+                    .build();
+
+            inventoryMovementService.createMovement(movimiento);
+        }
+
+        log.info("Movimientos de inventario creados exitosamente para orden ID: {}", savedOrder.getId());
         return orderMapper.toDetailsDTO(savedOrder);
     }
 
